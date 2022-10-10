@@ -15,9 +15,12 @@ let computerSelection;
 
 let computerScore = 0;
 let playerScore =  0;
-
+let err;
 // The basic game logic
 function playRound(computerSelection, playerSelection){
+
+    err = false;    
+    
     if (computerSelection == playerSelection) {
         return 'It is a drawww'
     } else if (computerSelection == 'rock' && playerSelection == 'scissors') {
@@ -39,6 +42,7 @@ function playRound(computerSelection, playerSelection){
         playerScore++
         return "Player Wins!! Scissors beats paper!"
     } else {
+        err = true;
         return "ERROR!!! What you have entered has not been found in our database! Please try again."
     }
 }
@@ -52,14 +56,18 @@ function game(){
         computerSelection = getComputerChoice()
 
         console.log(playRound(computerSelection, playerSelection))
+
+        if(err == true){
+            round--
+        }
     }
 
     if (computerScore == playerScore){
         console.log('Its a tie!!! Try again!')
     } else if (computerScore > playerScore){
-        console.log('uhh...The computer won. Nice try tho. ')
+        console.log('uhh...The computer won. Nice try tho. ' + 'Computer: ' + computerScore.toString() + ' Player: ' + playerScore.toString())
     } else if (playerScore > computerScore){
-        console.log('HOORAY!!! You have won!!! ')
+        console.log('HOORAY!!! You have won!!! \n' + 'Computer: ' + computerScore.toString() + ' Player: ' + playerScore.toString())
     }
 }
 game();
